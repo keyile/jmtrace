@@ -1,18 +1,20 @@
 package mtrace;
 
 public class Test{
-	private static int count = 0;
 	public static void main(String[] args) {
-		System.out.println(count);
-		count = 1;
+//		int[] a = new int [10];
+//		for (int i = 0; i < a.length; i++) {
+//			a[i] = 0;
+//		}
+		A a = new A();
+		double zz = a.f;
+		char cc = A.c;
+		a.f=3.14;
+		A.c ='l';
+
 	}
-//
-//	public static void printOne() {
-//		System.out.println("Hello World");
-//	}
-//
-//	public static void printTwo() {
-//		printOne();
-//		printOne();
-//	}
+}
+class A{
+	static char c = 'c';
+	double f;
 }
