@@ -26,8 +26,7 @@
     </dependencies>
 
     <build>
-        <finalName>agent</finalName>
-
+        <finalName>traceagent</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
