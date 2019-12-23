@@ -12,6 +12,7 @@ public class Test{
 		a.f=3.14;
 		A.c ='l';
 
+		Print.traceFieldRead(a, "c", 3.14);
 	}
 }
 class A{
