@@ -1,5 +1,3 @@
-package mtrace;
-
 public class Test{
 	public static void main(String[] args) {
 //		int[] a = new int [10];
@@ -11,11 +9,6 @@ public class Test{
 		char cc = A.c;
 		a.f=3.14;
 		A.c ='l';
-
-		Print.traceFieldRead(a, "c", 3.14);
 	}
 }
-class A{
-	static char c = 'c';
-	double f;
-}
+
