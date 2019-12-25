@@ -26,6 +26,7 @@ public class ClassInstrumenter implements ClassFileTransformer {
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
+        // Return null if no transform is performed.
         if (className.startsWith("java") || className.startsWith("sun") || className.startsWith("jdk")
         || className.startsWith("mtrace")) {
             return null;
