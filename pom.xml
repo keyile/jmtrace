@@ -49,7 +49,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>TestMain</mainClass>
+                                    <mainClass>test.TestMain</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>

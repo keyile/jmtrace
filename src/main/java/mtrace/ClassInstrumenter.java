@@ -26,11 +26,12 @@ public class ClassInstrumenter implements ClassFileTransformer {
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-        if (className.startsWith("java") || className.startsWith("sun") || className.startsWith("jdk")) {
+        if (className.startsWith("java") || className.startsWith("sun") || className.startsWith("jdk")
+        || className.startsWith("mtrace")) {
             return null;
         }
 
-        System.out.println("transform Class:" + className);
+        System.out.println("Transforming: " + className);
 
         ClassReader cr = new ClassReader(classfileBuffer);
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);

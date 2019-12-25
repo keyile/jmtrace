@@ -1,32 +1,52 @@
 package mtrace;
 
 public class Print {
-    void traceArrayRead() {
-
-    }
-    void traceArrayWrite() {
-
-    }
-    static void traceFieldRead(Object obj, String field, Object value) {
+    public static void traceArrayRead(Object arr, int index, Object value) {
         String rw = "R";
         long treadNumber = Thread.currentThread().getId();
-        long id = System.identityHashCode(obj);
-        String member = obj.getClass().getCanonicalName() + "." + field;
+        long id = System.identityHashCode(arr);
+        String member = arr.getClass().getCanonicalName() + "[" + index + "]";
 
         System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
-    void traceFieldWrite(Object obj, String field, Object value) {
+    public static void traceArrayWrite(Object arr, int index, Object value) {
         String rw = "W";
         long treadNumber = Thread.currentThread().getId();
-        long id = System.identityHashCode(obj);
+        long id = System.identityHashCode(arr);
+        String member = arr.getClass().getCanonicalName() + "[" + index + "]";
+
+        System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
+    }
+    public static void traceFieldRead(Object obj, String field, Object value) {
+        String rw = "R";
+        long treadNumber = Thread.currentThread().getId();
+        long id = ((long)System.identityHashCode(obj) << 32) + field.hashCode();
         String member = obj.getClass().getCanonicalName() + "." + field;
 
         System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
-    void traceStaticRead() {
+    public static void traceFieldWrite(Object obj, String field, Object value) {
+        String rw = "W";
+        long treadNumber = Thread.currentThread().getId();
+        long id = ((long)System.identityHashCode(obj) << 32) + field.hashCode();
+        String member = obj.getClass().getCanonicalName() + "." + field;
 
+        System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
-    void traceStaticWrite() {
+    public static void traceStaticRead(Class<?> cls, String field, Object value) {
+        String rw = "R";
+        long treadNumber = Thread.currentThread().getId();
+        long id = ((long)System.identityHashCode(cls) << 32) + field.hashCode();
+        String member = cls.getCanonicalName() + "." + field;
 
+        System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
+    }
+    public static void traceStaticWrite(Class<?> cls, String field, Object value) {
+        String rw = "W";
+        long treadNumber = Thread.currentThread().getId();
+        long id = ((long)System.identityHashCode(cls) << 32) + field.hashCode();
+        String member = cls.getCanonicalName() + "." + field;
+
+        System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
 }
