@@ -4,16 +4,18 @@ public class Print {
     public static void traceArrayRead(Object arr, int index, Object value) {
         String rw = "R";
         long treadNumber = Thread.currentThread().getId();
-        long id = System.identityHashCode(arr);
-        String member = arr.getClass().getCanonicalName() + "[" + index + "]";
+        long id = ((long)System.identityHashCode(arr) << 32) + index;
+        String member = arr.getClass().getCanonicalName();
+        member = member.substring(0, member.length() - 2) + "[" + index + "]";
 
         System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
     public static void traceArrayWrite(Object arr, int index, Object value) {
         String rw = "W";
         long treadNumber = Thread.currentThread().getId();
-        long id = System.identityHashCode(arr);
-        String member = arr.getClass().getCanonicalName() + "[" + index + "]";
+        long id = ((long)System.identityHashCode(arr) << 32) + index;
+        String member = arr.getClass().getCanonicalName();
+        member = member.substring(0, member.length() - 2) + "[" + index + "]";
 
         System.out.printf("%s %d %x %s\n", rw, treadNumber, id, member);
     }
