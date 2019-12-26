@@ -57,11 +57,22 @@ class MethodAdapter extends MethodVisitor implements Opcodes {
 
     @Override
     public void visitInsn(int opcode) {
-        if(opcode == IALOAD) {
+        if(opcode >= IALOAD && opcode <= SALOAD) {
             mv.visitInsn(DUP2);
             mv.visitInsn(ACONST_NULL);
             mv.visitMethodInsn(INVOKESTATIC, "mtrace/Print", "traceArrayRead", "(Ljava/lang/Object;ILjava/lang/Object;)V", false);
-        } else if(opcode == IASTORE) {
+        } else if (opcode == LASTORE || opcode == DASTORE) {
+            // v1, v2, w
+            mv.visitInsn(DUP2_X2);
+            mv.visitInsn(POP2);
+            // w, v1, v2
+            mv.visitInsn(DUP2);
+            mv.visitInsn(ACONST_NULL);
+            mv.visitMethodInsn(INVOKESTATIC, "mtrace/Print", "traceArrayWrite", "(Ljava/lang/Object;ILjava/lang/Object;)V", false);
+            // w, v1, v2
+            mv.visitInsn(DUP2_X2);
+            mv.visitInsn(POP2);
+        } else if(opcode >= IASTORE && opcode <= SASTORE) {
             // v1, v2, v3
             mv.visitInsn(DUP_X2);
             mv.visitInsn(POP);
