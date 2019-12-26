@@ -32,7 +32,7 @@ public class ClassInstrumenter implements ClassFileTransformer {
             return null;
         }
 
-        System.out.println("Transforming: " + className);
+//        System.out.println("Transforming: " + className);
 
         ClassReader cr = new ClassReader(classfileBuffer);
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);

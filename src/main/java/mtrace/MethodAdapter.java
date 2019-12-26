@@ -31,13 +31,25 @@ class MethodAdapter extends MethodVisitor implements Opcodes {
             mv.visitInsn(ACONST_NULL);
             mv.visitMethodInsn(INVOKESTATIC, "mtrace/Print", "traceFieldRead", "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V", false);
         }
-        else if(opcode == PUTFIELD) {
+        else if(opcode == PUTFIELD && Type.getType(descriptor).getSize() == 1) {
             mv.visitInsn(SWAP);
             mv.visitInsn(DUP);
             mv.visitLdcInsn(name);
             mv.visitInsn(ACONST_NULL);
             mv.visitMethodInsn(INVOKESTATIC, "mtrace/Print", "traceFieldWrite", "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V", false);
             mv.visitInsn(SWAP);
+        } else if(opcode == PUTFIELD && Type.getType(descriptor).getSize() == 2) {
+            // v, w
+            mv.visitInsn(DUP2_X1);
+            mv.visitInsn(POP2);
+            // w, v
+            mv.visitInsn(DUP);
+            mv.visitLdcInsn(name);
+            mv.visitInsn(ACONST_NULL);
+            mv.visitMethodInsn(INVOKESTATIC, "mtrace/Print", "traceFieldWrite", "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V", false);
+            // w, v
+            mv.visitInsn(DUP_X2);
+            mv.visitInsn(POP);
         }
 
         mv.visitFieldInsn(opcode, owner, name, descriptor);
