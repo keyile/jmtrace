@@ -15,9 +15,9 @@ Build with maven, and it will resolve the dependencies and generate a jar file.
     
 Then you should be able to run the tests:
 
-    jmtrace -jar target\traceagent-tests.jar
-    jmtrace -cp target\traceagent-tests.jar test.TestType
-    jmtrace -cp target\traceagent-tests.jar test.TestThread
+    jmtrace -jar target/traceagent-tests.jar    # Change the path separator if you are on Windows.
+    jmtrace -cp target/traceagent-tests.jar test.TestType
+    jmtrace -cp target/traceagent-tests.jar test.TestThread
     
 To run your own programs, `jmtrace` has the same usage as `java`.
 
